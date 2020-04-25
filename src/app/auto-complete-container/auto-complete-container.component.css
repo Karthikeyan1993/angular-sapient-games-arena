@@ -1,0 +1,19 @@
+:host {
+  position: absolute;
+  display: block;
+  width: 100%;
+}
+.dropdown-menu{
+  border-radius: 0px;
+  background-color: #545b62;
+}
+.dropdown-item{
+  color: #fff;
+}
+.search-highlight{
+  color: tomato!important;
+}
+
+:host ::ng-deep .search-highlight{
+  color: tomato !important;
+}

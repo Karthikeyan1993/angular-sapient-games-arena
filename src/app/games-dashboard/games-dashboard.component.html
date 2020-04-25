@@ -1,0 +1,14 @@
+<div class="row">
+	<div class="col-sm-12 col-md-4 col-lg-4">
+		<div class="form-group">
+			<input autocomplete="off" [(ngModel)]="search" [appAutoComplete]=titles placeholder="Search by name" type="text" class="form-control" id="search">
+		</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12 col-md-12 col-lg-12">
+			<div class="card">
+				<app-common-data-table [columnDef]=columnDef [data]=data [height]="450"></app-common-data-table>
+			</div>
+		</div>
+	</div>

@@ -1,0 +1,6 @@
+<ul class="dropdown-menu show list-unstyled" style="width:94%">
+	<li (mouseenter)="selectActive(row)" [ngClass]="{'active': row ===_active}" (click)="selectItem(item)" class="dropdown-item"
+	 *ngFor="let item of items;let row=index;">
+    <span [innerHTML]="item | highlight: searchVal"></span>
+	</li>
+</ul>
