@@ -1,4 +1,4 @@
-import { Directive, Input, HostListener, ComponentRef, ElementRef, ViewContainerRef, ComponentFactoryResolver, Renderer2 } from "@angular/core";
+import { Directive, Input, HostListener, ComponentRef, ElementRef, ViewContainerRef, ComponentFactoryResolver, Renderer2,EventEmitter,Output} from "@angular/core";
 import { NgControl } from '@angular/forms';
 import { Subject, from } from "rxjs";
 import { map, distinctUntilChanged, debounceTime, mergeMap, filter, toArray } from 'rxjs/operators';
@@ -13,6 +13,7 @@ export class AutoCompleteDirective {
   inputEventSubscription: Subject<any> = new Subject<any>();
   matches = [];
   compRef: ComponentRef<AutoCompleteContainerComponent> = null;
+  @Output() private selected: EventEmitter<any> = new EventEmitter();
   constructor(private element: ElementRef, private ngControl: NgControl, private _vcRef: ViewContainerRef, private _cfResolver: ComponentFactoryResolver, private _r2: Renderer2) {
     this.listenFunc = _r2.listen('document', 'click', (event: MouseEvent) => {
       if (this.element.nativeElement.contains(event.target)) {
@@ -77,6 +78,7 @@ export class AutoCompleteDirective {
   public changeModelValue = (value: any): void => {
     this.ngControl.viewToModelUpdate(value);
     (this.ngControl.control).setValue(value);
+    this.selected.next(value);
     this.hide();
   }
 

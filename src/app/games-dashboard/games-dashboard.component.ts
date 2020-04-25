@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GameServiceService } from '../services/game-service.service';
+import { TableFilterPipe } from '../table-filter.pipe';
 
 @Component({
   selector: 'app-games-dashboard',
@@ -11,7 +12,8 @@ export class GamesDashboardComponent implements OnInit {
   columnDef = [];
   titles = [];
   search;
-  constructor(private _gameService: GameServiceService) { }
+  original;
+  constructor(private _gameService: GameServiceService,private _pipe:TableFilterPipe) { }
 
   ngOnInit() {
     this.getGamesData();
@@ -20,8 +22,9 @@ export class GamesDashboardComponent implements OnInit {
 
   getGamesData = () => {
     this._gameService.getData().subscribe(res => {
+      this.original = res;
       this.data = res;
-      this.data.forEach((ele)=> this.titles.push(ele['title']));
+      this.original.forEach((ele)=> this.titles.push(ele['title']));
     });
   }
 
@@ -34,6 +37,10 @@ export class GamesDashboardComponent implements OnInit {
       {prop:'editors_choice',displayName:'Editors Choice',width:10},
       {prop:'release_year',displayName:'Release Year',width:10}
     ];
+  }
+
+  getSelectedData = (e)=>{
+    this.data = this._pipe.transform(this.original,e,'title');
   }
 
 }

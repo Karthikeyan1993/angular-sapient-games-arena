@@ -18,6 +18,7 @@ import { TableSortPipe } from './table-sort.pipe';
 import { AutoCompleteDirective } from './auto-complete.directive';
 import { AutoCompleteContainerComponent } from './auto-complete-container/auto-complete-container.component';
 import { HighlightPipe } from './highlight.pipe';
+import { TableFilterPipe } from './table-filter.pipe';
 
 
 @NgModule({
@@ -32,9 +33,10 @@ import { HighlightPipe } from './highlight.pipe';
     AutoCompleteDirective,
     AutoCompleteContainerComponent,
     HighlightPipe,
+    TableFilterPipe,
   ],
   bootstrap: [AppComponent],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptorService, multi: true},ScrollDispatcher,TableSortPipe],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptorService, multi: true},ScrollDispatcher,TableSortPipe,TableFilterPipe],
   entryComponents:[AutoCompleteContainerComponent]
 })
 export class AppModule {}
