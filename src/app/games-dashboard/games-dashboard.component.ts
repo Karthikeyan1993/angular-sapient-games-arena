@@ -43,4 +43,9 @@ export class GamesDashboardComponent implements OnInit {
     this.data = this._pipe.transform(this.original,e,'title');
   }
 
+  reset=()=>{
+    this.search='';
+    this.getGamesData();
+  }
+
 }
